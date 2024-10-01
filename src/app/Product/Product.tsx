@@ -30,7 +30,7 @@ export default function ProductListing() {
   const Router = useRouter()
 
 
- 
+ //gjngfojgnfognfoifoibnfiobngoiibn
 
   useEffect(() => {
     fetch('https://fakestoreapi.com/products')
