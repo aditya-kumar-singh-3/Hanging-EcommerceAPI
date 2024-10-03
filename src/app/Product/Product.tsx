@@ -199,7 +199,7 @@ export default function ProductListing() {
                           {showFullStar ? (
                             <span className="text-yellow-400">★</span>
                           ) : showHalfStar ? (
-                            <span className="text-yellow-400"><MdStarHalf /></span>
+                            <span className="text-yellow-400"><MdStarHalf/></span>
                           ) : (
                             <span className="text-gray-300">★</span>
                           )}
