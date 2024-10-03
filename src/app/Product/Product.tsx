@@ -1,4 +1,3 @@
-
 'use client';
 
 import { useState, useEffect } from 'react';
@@ -83,11 +82,16 @@ export default function ProductListing() {
   }
 
   function updateCart(id: number) {
-    const data = products.find((item) => item.id === id);
-    if (data) {
-      dispatch(addtocart(data));
-      setCartItems((prevItems) => [...prevItems, id]);
-    }
+    fetch(`https://fakestoreapi.com/products/${id}`)
+            .then(res=>res.json())
+            .then((json)=> {
+              dispatch(addtocart(json));
+            })
+    
+   
+     
+       setCartItems((prevItems) => [...prevItems, id]);
+    
   }
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -162,7 +166,7 @@ export default function ProductListing() {
           className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition-colors md:mt-0 mt-20"
           onClick={sortProducts}
         >
-          {isSorted ? 'Normal' : 'Sort'}
+          {isSorted ? 'Ascending' : 'Descending'}
         </button>
       </div>
 
