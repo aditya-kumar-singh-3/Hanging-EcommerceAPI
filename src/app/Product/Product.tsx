@@ -5,6 +5,8 @@ import { addtocart } from '../Redux/CreateSlice';
 import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
+import { MdStarHalf } from "react-icons/md";
+
 
 interface ProductType {
   id: number;
@@ -23,7 +25,7 @@ export default function ProductListing() {
   const [originalProducts, setOriginalProducts] = useState<ProductType[]>([]);
   const [categories, setCategories] = useState<string[]>([]); 
   const [loading, setLoading] = useState<boolean>(true);
-  const [cartItems, setCartItems] = useState<number[]>([]);
+  const [cartItems, setCartItems] = useState<number[]>([]); 
   const [category, setCategory] = useState<string>('');
   const [isSorted, setIsSorted] = useState<boolean>(false);
   const [page, setPage] = useState<number>(1); 
@@ -36,7 +38,6 @@ export default function ProductListing() {
   }, [page]);
 
   useEffect(() => {
-    
     fetch('https://fakestoreapi.com/products/categories')
       .then((res) => res.json())
       .then((json) => {
@@ -49,7 +50,7 @@ export default function ProductListing() {
 
   const fetchProducts = () => {
     setLoading(true);
-    fetch(`https://fakestoreapi.com/products`)
+    fetch('https://fakestoreapi.com/products')
       .then((res) => res.json())
       .then((json) => {
         setProducts((prevProducts) => [...prevProducts, ...json]);
@@ -62,7 +63,6 @@ export default function ProductListing() {
       });
   };
 
-  
   const handleScroll = () => {
     if (
       window.innerHeight + window.scrollY >= document.body.offsetHeight - 500 &&
@@ -83,15 +83,12 @@ export default function ProductListing() {
 
   function updateCart(id: number) {
     fetch(`https://fakestoreapi.com/products/${id}`)
-            .then(res=>res.json())
-            .then((json)=> {
-              dispatch(addtocart(json));
-            })
-    
-   
-     
-       setCartItems((prevItems) => [...prevItems, id]);
-    
+      .then((res) => res.json())
+      .then((json) => {
+        dispatch(addtocart(json));
+      });
+
+    setCartItems((prevItems) => [...prevItems, id]);
   }
 
   const handleSelect = (event: React.ChangeEvent<HTMLSelectElement>) => {
@@ -192,14 +189,23 @@ export default function ProductListing() {
                 </h2>
                 <div className="flex items-center mb-2">
                   <div className="flex items-center">
-                    {[...Array(5)].map((_, index) => (
-                      <span
-                        key={index}
-                        className={`text-lg ${index < Math.floor(product.rating.rate) ? 'text-yellow-400' : 'text-gray-300'}`}
-                      >
-                        ★
-                      </span>
-                    ))}
+                    {[...Array(5)].map((_, index) => {
+                      const wholeStars = Math.floor(product.rating.rate);
+                      const isHalfStar = product.rating.rate - wholeStars >= 0.5;
+                      const showFullStar = index < wholeStars;
+                      const showHalfStar = isHalfStar && index === wholeStars;
+                      return (
+                        <span key={index} className="text-lg">
+                          {showFullStar ? (
+                            <span className="text-yellow-400">★</span>
+                          ) : showHalfStar ? (
+                            <span className="text-yellow-400"><MdStarHalf /></span>
+                          ) : (
+                            <span className="text-gray-300">★</span>
+                          )}
+                        </span>
+                      );
+                    })}
                   </div>
                   <span className="ml-2 text-sm text-gray-600">({product.rating.count})</span>
                 </div>
@@ -208,7 +214,9 @@ export default function ProductListing() {
               <div className="p-4 bg-gray-50">
                 <button
                   onClick={() => updateCart(product.id)}
-                  className={`w-full py-2 px-4 rounded-md transition-colors ${cartItems.includes(product.id) ? 'bg-red-500 text-white' : 'bg-orange-500 text-white hover:opacity-75'}`}
+                  className={`w-full py-2 px-4 rounded-md transition-colors ${
+                    cartItems.includes(product.id) ? 'bg-red-500 text-white' : 'bg-orange-500 text-white hover:opacity-75'
+                  }`}
                   disabled={cartItems.includes(product.id)}
                 >
                   {cartItems.includes(product.id) ? 'Already in Cart' : 'Add to Cart'}
