@@ -16,7 +16,7 @@ interface Product {
 }
 
 const CartContent = () => {
-  const cartInfo = useSelector((state: RootState) => state.cart.cartData) as Product[]; // Cast to Product array
+  const cartInfo = useSelector((state: RootState) => state.cart.cartData) as unknown as Product[]; // Cast to Product array
   const dispatch = useDispatch();
 
   useEffect(() => {
