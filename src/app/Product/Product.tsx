@@ -50,7 +50,7 @@ export default function ProductListing() {
 
   const fetchProducts = (page: number) => {
     setLoading(true);
-    fetch(`https://fakestoreapi.com/products?limit=${page * 4}`)
+    fetch(`https://fakestoreapi.com/products?limit=${page * 10}`)
       .then((res) => res.json())
       .then((json) => {
         setProducts((prevProducts) => [...prevProducts, ...json]);
