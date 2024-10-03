@@ -53,9 +53,7 @@ const CartContent = () => {
     dispatch(removefromcart(id));
   };
 
-  useEffect(()=>{
-    console.log(cartInfo);
-  })
+  
 
   return (
     <>
