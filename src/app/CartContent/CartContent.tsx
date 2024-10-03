@@ -31,7 +31,7 @@ const CartContent = () => {
     return (
       <div className="container mx-auto px-4 py-16 text-center">
         <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
-        <p className="text-gray-600 mb-8">Looks like you haven't added any items to your cart yet.</p>
+        <p className="text-gray-600 mb-8">Looks like you have not added any items to your cart yet.</p>
         <Link href="/">
           <button className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">
             Continue Shopping
