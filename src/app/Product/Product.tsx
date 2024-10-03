@@ -6,6 +6,7 @@ import { useDispatch } from 'react-redux';
 import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MdStarHalf } from "react-icons/md";
+import { GiShoppingBag } from "react-icons/gi";
 
 
 interface ProductType {
@@ -142,14 +143,18 @@ export default function ProductListing() {
 
   return (
     <>
-      <div>
+
+      <div className='fixed top-0 min-w-full bg-blue-500 h-14 flex justify-start items-center text-white z-10 '>
+      <div >
         <Link href="/Cart">
-          <p className="ml-5 mt-5 font-bold">CART &rarr;</p>
+          <p className="ml-10 text-2xl   font-bold"><GiShoppingBag /></p>
         </Link>
       </div>
 
+      </div>
+
       <div>
-        <select onChange={handleSelect} className="border-2 border-black ml-20 translate-y-12 w-60 p-1 rounded-full ">
+        <select onChange={handleSelect} className="border-2 border-black ml-20 translate-y-12 w-60 p-1 rounded-full mt-10 ">
           {categories.map((category) => (
             <option key={category} value={category}>
               {category.charAt(0).toUpperCase() + category.slice(1)}
@@ -215,7 +220,7 @@ export default function ProductListing() {
                 <button
                   onClick={() => updateCart(product.id)}
                   className={`w-full py-2 px-4 rounded-md transition-colors ${
-                    cartItems.includes(product.id) ? 'bg-red-500 text-white' : 'bg-orange-500 text-white hover:opacity-75'
+                    cartItems.includes(product.id) ? 'bg-red-500 text-white' : 'bg-yel text-black font-bold hover:opacity-75'
                   }`}
                   disabled={cartItems.includes(product.id)}
                 >

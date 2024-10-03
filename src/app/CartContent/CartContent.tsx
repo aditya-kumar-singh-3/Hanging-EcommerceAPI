@@ -6,6 +6,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Redux/Store';
 import Link from 'next/link';
 import { removefromcart } from '../Redux/CreateSlice';
+import { IoHomeSharp } from "react-icons/io5";
+import Lottie from "lottie-react";
+import cartAnime from "./emptycart.json";
+
 
 interface Product {
   id: number; // Ensure this matches your Product interface
@@ -19,9 +23,6 @@ const CartContent = () => {
   const cartInfo = useSelector((state: RootState) => state.cart.cartData) as unknown as Product[]; // Cast to Product array
   const dispatch = useDispatch();
 
-  useEffect(() => {
-    console.log(cartInfo);
-  }, [cartInfo]);
 
   const calculateTotal = () => {
     return cartInfo.reduce((total, item) => total + item.price * item.quantity, 0);
@@ -33,9 +34,15 @@ const CartContent = () => {
         <h1 className="text-3xl font-bold mb-4">Your Cart is Empty</h1>
         <p className="text-gray-600 mb-8">Looks like you have not added any items to your cart yet.</p>
         <Link href="/">
-          <button className="bg-blue-600 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">
+          <button className="bg-blue-500 text-white py-2 px-6 rounded-md hover:bg-blue-700 transition-colors">
             Continue Shopping
+
           </button>
+          <div className='min-w-full flex justify-center items-center translate-y-20'>
+          <div className='h-96 w-96'>
+          <Lottie animationData={cartAnime} loop={true} />
+          </div>
+          </div>
         </Link>
       </div>
     );
@@ -46,10 +53,22 @@ const CartContent = () => {
     dispatch(removefromcart(id));
   };
 
+  useEffect(()=>{
+    console.log(cartInfo);
+  })
+
   return (
     <>
+      
+
+<div className='fixed top-0 min-w-full bg-blue-500 h-14 flex justify-start items-center text-white z-10 '>
       <div>
-        <Link href="/" className="ml-5 mt-5">Back to Home</Link>
+        <Link href="/">
+          <p className="ml-10 text-2xl   font-bold"><IoHomeSharp />
+          </p>
+        </Link>
+      </div>
+
       </div>
       <div className="container mx-auto px-4 py-16">
         <h1 className="text-3xl font-bold mb-8">Your Shopping Cart</h1>
@@ -62,7 +81,7 @@ const CartContent = () => {
                 </div>
                 <div className="ml-4 flex-1">
                   <h2 className="text-lg font-semibold">{item.name}</h2>
-                  <p className="text-gray-600">${item.price.toFixed(2)}</p>
+                  <p className="text-gray-600 font-black">${item.price.toFixed(2)}</p>
                 </div>
                 <div className="ml-4">
                   <p className="text-lg font-semibold">${(item.price * item.quantity).toFixed(2)}</p>
@@ -73,8 +92,8 @@ const CartContent = () => {
               </div>
             ))}
           </div>
-          <div className="md:col-span-1">
-            <div className="bg-gray-50 rounded-lg p-6">
+          <div className="md:col-span-1 text-white">
+            <div className="bg-blue-500 rounded-lg p-6">
               <h2 className="text-xl font-semibold mb-4">Order Summary</h2>
               <div className="flex justify-between mb-2">
                 <span>Subtotal</span>
@@ -88,13 +107,13 @@ const CartContent = () => {
                 <span>Taxes</span>
                 <span>$0.00</span>
               </div>
-              <div className="border-t border-gray-200 mt-4 pt-4">
+              <div className="border-t  mt-4 pt-4">
                 <div className="flex justify-between items-center">
                   <span className="text-xl font-semibold">Total</span>
                   <span className="text-2xl font-bold">${calculateTotal().toFixed(2)}</span>
                 </div>
               </div>
-              <button className="w-full bg-blue-600 text-white py-3 rounded-md mt-6 hover:bg-blue-700 transition-colors">
+              <button className="w-full bg-yel  text-blue-800 py-3 rounded-md mt-6 hover:bg-yellow-500 transition-colors">
                 Proceed to Checkout
               </button>
             </div>

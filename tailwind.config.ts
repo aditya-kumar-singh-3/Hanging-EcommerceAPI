@@ -12,6 +12,7 @@ const config: Config = {
       colors: {
         background: "var(--background)",
         foreground: "var(--foreground)",
+        yel: "#FFFF00"
       },
       width: {
         '450': '450px',
