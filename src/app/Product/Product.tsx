@@ -21,18 +21,18 @@ interface ProductType {
 export default function ProductListing() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [originalProducts, setOriginalProducts] = useState<ProductType[]>([]);
-  const [categories, setCategories] = useState<string[]>([]); // State to store categories
+  const [categories, setCategories] = useState<string[]>([]); 
   const [loading, setLoading] = useState<boolean>(true);
   const [cartItems, setCartItems] = useState<number[]>([]);
   const [category, setCategory] = useState<string>('');
   const [isSorted, setIsSorted] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1); // Page state to handle pagination
+  const [page, setPage] = useState<number>(1); 
 
   const dispatch = useDispatch();
   const Router = useRouter();
 
   useEffect(() => {
-    fetchProducts(page);
+    fetchProducts();
   }, [page]);
 
   useEffect(() => {
@@ -47,7 +47,7 @@ export default function ProductListing() {
       });
   }, []);
 
-  const fetchProducts = (page: number) => {
+  const fetchProducts = () => {
     setLoading(true);
     fetch(`https://fakestoreapi.com/products`)
       .then((res) => res.json())
