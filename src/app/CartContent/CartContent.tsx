@@ -42,7 +42,7 @@ const CartContent = () => {
   }
 
   const deleteitem = (id: number) => {
-    // Instead of finding the item in the cart, just dispatch using the id
+    
     dispatch(removefromcart(id));
   };
 

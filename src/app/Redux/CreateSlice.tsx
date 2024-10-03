@@ -49,11 +49,12 @@ const cartSlice = createSlice({
       }
     },
     removefromcart(state, action) {
-      const item = action.payload as Product;  // Explicitly typing the payload as Product
-
-      const updatedCart = state.cartData.filter((itemm: Product) => itemm.id !== item.id);
+      const idToRemove = action.payload; // This should be the ID of the item to remove
+    
+      const updatedCart = state.cartData.filter((item: Product) => item.id !== idToRemove);
       state.cartData = updatedCart;
     },
+    
   },
 });
 
