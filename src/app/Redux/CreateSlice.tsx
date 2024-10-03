@@ -1,8 +1,7 @@
-//@ts-nocheck
-import { db } from "@/app/config";
+
 import { createSlice, PayloadAction } from "@reduxjs/toolkit";
-import { getCookie } from "cookies-next";
-import { doc, getDoc, setDoc } from "firebase/firestore";
+
+
 
 
 
@@ -23,10 +22,10 @@ const initialState: CartState = {
   cartData: [],
   wishListData: [],
   totalProductInCart: 0,
-  
+
   quantity: 1,
   totalProductInWishlist: 0,
-
+  added: false
 };
 
 const cartSlice = createSlice({
@@ -40,7 +39,7 @@ const cartSlice = createSlice({
             console.error("Invalid item:", item);
             return;
           }
-          const isThere = state.cartData.find((itemm) => itemm.id === item.id);
+          const isThere = state.cartData.find((itemm: { id: any; }) => itemm.id === item.id);
 
           if (!isThere) {
             state.cartData.push(item);
@@ -50,7 +49,7 @@ const cartSlice = createSlice({
     removefromcart(state,action){
       const item = action.payload;
 
-      const updatedCart = state.cartData.filter((itemm)=> itemm.id != item.id);
+      const updatedCart = state.cartData.filter((itemm: { id: any; })=> itemm.id != item.id);
       state.cartData = updatedCart;
     },
 

@@ -1,4 +1,4 @@
-//@ts-nocheck
+
 "use client"
 
 import { ShoppingCart, Star, Truck, Shield, ArrowLeft } from 'lucide-react'
@@ -27,12 +27,12 @@ const SingleInfo: React.FC = () => {
   const [selectedSize, setSelectedSize] = useState<string>('M') // Define type
   const [selectedColor, setSelectedColor] = useState<string>('Black') // Define type
   const [mainImage, setMainImage] = useState<string>('') // Define type
-  const [additionalImages, setAdditionalImages] = useState<string[]>([
-    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
-    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
-    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
-    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
-  ])
+  // const [additionalImages, setAdditionalImages] = useState<string[]>([
+  //   "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+  //   "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+  //   "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+  //   "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+  // ])
 
   const sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'] // Define type
   const colors: string[] = ['Black', 'White', 'Red', 'Blue'] // Define type
@@ -103,8 +103,9 @@ const SingleInfo: React.FC = () => {
             />
           </div>
           <div className="grid grid-cols-4 gap-2">
-            {additionalImages.map((img, index) => (
+            {/* {additionalImages.map((img, index) => (
               <div
+             
                 key={index}
                 className="bg-white p-2 rounded-lg cursor-pointer shadow-2xl hover:scale-110"
               >
@@ -116,7 +117,7 @@ const SingleInfo: React.FC = () => {
                   alt={`Additional view ${index + 1}`}
                 />
               </div>
-            ))}
+            ))} */}
           </div>
         </div>
         <div className="lg:w-1/2">

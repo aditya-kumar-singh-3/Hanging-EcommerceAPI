@@ -1,9 +1,9 @@
-//@ts-nocheck
+
 import type { Metadata } from "next";
 import localFont from "next/font/local";
 import "./globals.css";
 import ClientProvider from "./Redux/Provider";
-import { store } from "./Redux/Store";
+
 
 const geistSans = localFont({
   src: "./fonts/GeistVF.woff",
