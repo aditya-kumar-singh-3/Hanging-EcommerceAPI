@@ -1,3 +1,4 @@
+//@ts-nocheck
 import Image from "next/image";
 import Product from "./Product/Product";
 

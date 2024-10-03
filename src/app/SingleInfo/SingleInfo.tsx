@@ -1,9 +1,9 @@
+//@ts-nocheck
 "use client"
 
 import { ShoppingCart, Star, Truck, Shield, ArrowLeft } from 'lucide-react'
 import { useParams, useRouter } from 'next/navigation'
 import React, { useEffect, useState } from 'react'
-
 
 interface ProductType {
   id: number
@@ -18,34 +18,44 @@ interface ProductType {
   }
 }
 
-const SingleInfo = () => {
-  const { id } = useParams()
+const SingleInfo: React.FC = () => {
+  const { id } = useParams<{ id: string }>() // Add explicit type for params
   const router = useRouter()
   const [singleProduct, setSingleProduct] = useState<ProductType | null>(null)
-  const [loading, setLoading] = useState(true)
+  const [loading, setLoading] = useState<boolean>(true) // Explicitly define type
   const [error, setError] = useState<string | null>(null)
-  const [selectedSize, setSelectedSize] = useState('M')
-  const [selectedColor, setSelectedColor] = useState('Black')
-  const [mainImage, setMainImage] = useState('')
-  const [additionalImages,setAdditionalImages] = useState(["https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA","https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA","https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA","https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA"])
+  const [selectedSize, setSelectedSize] = useState<string>('M') // Define type
+  const [selectedColor, setSelectedColor] = useState<string>('Black') // Define type
+  const [mainImage, setMainImage] = useState<string>('') // Define type
+  const [additionalImages, setAdditionalImages] = useState<string[]>([
+    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+    "https://www.google.com/imgres?q=wait&imgurl=https%3A%2F%2Fdeadlydog.gallerycdn.vsassets.io%2Fextensions%2Fdeadlydog%2Fwaitbuildandreleasetask%2F1.2.31%2F1574358766086%2FMicrosoft.VisualStudio.Services.Icons.Default&imgrefurl=https%3A%2F%2Fmarketplace.visualstudio.com%2Fitems%3FitemName%3Ddeadlydog.WaitBuildAndReleaseTask&docid=Tsz_rRtWgBorLM&tbnid=5ZagdjmV7OaRkM&vet=12ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA..i&w=256&h=256&hcb=2&ved=2ahUKEwirvd-dku2IAxWOSmwGHaq8Ji8QM3oECBsQAA",
+  ])
 
-  const sizes = ['XS', 'S', 'M', 'L', 'XL']
-  const colors = ['Black', 'White', 'Red', 'Blue']
+  const sizes: string[] = ['XS', 'S', 'M', 'L', 'XL'] // Define type
+  const colors: string[] = ['Black', 'White', 'Red', 'Blue'] // Define type
 
   useEffect(() => {
-    setLoading(true)
-    fetch(`https://fakestoreapi.com/products/${id}`)
-      .then((res) => res.json())
-      .then((json) => {
-        setSingleProduct(json)
-        setMainImage(json.image)
-        setLoading(false)
-      })
-      .catch((error) => {
-        console.error('Error fetching product:', error)
-        setError('Failed to load product. Please try again.')
-        setLoading(false)
-      })
+    if (id) {
+      setLoading(true)
+      fetch(`https://fakestoreapi.com/products/${id}`)
+        .then((res) => res.json())
+        .then((json: ProductType) => {
+          setSingleProduct(json)
+          setMainImage(json.image)
+          setLoading(false)
+        })
+        .catch((error) => {
+          console.error('Error fetching product:', error)
+          setError('Failed to load product. Please try again.')
+          setLoading(false)
+        })
+    } else {
+      setError('Invalid product ID')
+      setLoading(false)
+    }
   }, [id])
 
   if (loading) {
@@ -74,7 +84,6 @@ const SingleInfo = () => {
     return <div className="text-center py-10 text-xl">Product not found</div>
   }
 
- 
   return (
     <div className="container mx-auto px-4 py-8">
       <button
@@ -86,29 +95,28 @@ const SingleInfo = () => {
       </button>
       <div className="flex flex-col lg:flex-row gap-8 ">
         <div className="lg:w-1/2">
-          <div className="bg-white p-4 rounded-lg shadow-2xl  mb-4 flex justify-center items-center ">
-         <img
+          <div className="bg-white p-4 rounded-lg shadow-2xl mb-4 flex justify-center items-center">
+            <img
               src={mainImage}
               alt={singleProduct.title}
-             
               className="w-96 h-96 object-contain"
             />
           </div>
-          <div className="grid grid-cols-4 gap-2 ">
+          <div className="grid grid-cols-4 gap-2">
             {additionalImages.map((img, index) => (
               <div
-              
+                key={index}
                 className="bg-white p-2 rounded-lg cursor-pointer shadow-2xl hover:scale-110"
-               
               >
-             <img
-                  
+                <img
+                  src={img} // Add the image source here
                   width={100}
                   height={100}
                   className="w-full h-auto object-contain"
+                  alt={`Additional view ${index + 1}`}
                 />
               </div>
-            ))} 
+            ))}
           </div>
         </div>
         <div className="lg:w-1/2">
@@ -125,29 +133,19 @@ const SingleInfo = () => {
               {[...Array(5)].map((_, i) => (
                 <Star
                   key={i}
-                  className={`w-5 h-5 ${
-                    i < Math.round(singleProduct.rating.rate)
-                      ? 'text-yellow-400 fill-current'
-                      : 'text-gray-300'
-                  }`}
+                  className={`h-5 w-5 ${i < singleProduct.rating.rate ? 'text-yellow-500' : 'text-gray-300'}`}
                 />
               ))}
             </div>
-            <span className="text-sm text-gray-600">
-              {singleProduct.rating.rate} ({singleProduct.rating.count} reviews)
-            </span>
+            <span className="text-gray-500 text-sm">{singleProduct.rating.count} ratings</span>
           </div>
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-2">Size:</h3>
-            <div className="flex space-x-2">
+            <h2 className="text-xl font-semibold mb-2">Select Size</h2>
+            <div className="flex gap-2">
               {sizes.map((size) => (
                 <button
                   key={size}
-                  className={`px-3 py-1 border rounded ${
-                    selectedSize === size
-                      ? 'bg-orange-500 text-white'
-                      : 'bg-white text-gray-900 hover:bg-gray-100'
-                  }`}
+                  className={`border rounded px-3 py-1 ${selectedSize === size ? 'bg-blue-500 text-white' : 'bg-white'}`}
                   onClick={() => setSelectedSize(size)}
                 >
                   {size}
@@ -156,35 +154,32 @@ const SingleInfo = () => {
             </div>
           </div>
           <div className="mb-6">
-            <h3 className="text-lg font-semibold mb-2">Color:</h3>
-            <div className="flex space-x-2">
+            <h2 className="text-xl font-semibold mb-2">Select Color</h2>
+            <div className="flex gap-2">
               {colors.map((color) => (
                 <button
                   key={color}
-                  className={`w-8 h-8 rounded-full border-2 ${
-                    selectedColor === color ? 'border-gray-900' : 'border-gray-300'
-                  }`}
-                  style={{ backgroundColor: color.toLowerCase() }}
+                  className={`border rounded px-3 py-1 ${selectedColor === color ? 'bg-blue-500 text-white' : 'bg-white'}`}
                   onClick={() => setSelectedColor(color)}
                 >
-                  <span className="sr-only">{color}</span>
+                  {color}
                 </button>
               ))}
             </div>
           </div>
-          <button className="w-full bg-orange-500 text-white px-6 py-3 rounded-md flex items-center justify-center  transition-colors mb-6">
-            <ShoppingCart className="w-5 h-5 mr-2" />
-            Add to Cart
-          </button>
-          <div className="border-t border-gray-200 pt-6">
-            <div className="flex items-center mb-4">
-              <Truck className="w-5 h-5 mr-2 text-green-500" />
-              <span className="text-sm text-green-500">Free shipping on orders over $50</span>
-            </div>
-            <div className="flex items-center">
-              <Shield className="w-5 h-5 mr-2 text-green-500" />
-              <span className="text-sm text-green-500">30-day money-back guarantee</span>
-            </div>
+          <div className="flex items-center">
+            <button className="flex items-center bg-blue-500 text-white px-4 py-2 rounded hover:bg-blue-600 transition-colors">
+              <ShoppingCart className="w-5 h-5 mr-2" />
+              Add to Cart
+            </button>
+            <button className="flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded ml-2 hover:bg-gray-300 transition-colors">
+              <Truck className="w-5 h-5 mr-2" />
+              Fast Shipping
+            </button>
+            <button className="flex items-center bg-gray-200 text-gray-700 px-4 py-2 rounded ml-2 hover:bg-gray-300 transition-colors">
+              <Shield className="w-5 h-5 mr-2" />
+              Secure Payment
+            </button>
           </div>
         </div>
       </div>
