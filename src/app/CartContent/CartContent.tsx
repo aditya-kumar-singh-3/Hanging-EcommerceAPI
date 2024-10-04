@@ -1,7 +1,6 @@
 
 'use client';
 
-import React, { useEffect } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { RootState } from '../Redux/Store';
 import Link from 'next/link';
