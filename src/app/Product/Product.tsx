@@ -168,7 +168,7 @@ export default function ProductListing() {
           className="bg-green-500 text-white py-2 px-6 rounded-md hover:bg-green-600 transition-colors md:mt-0 mt-20"
           onClick={sortProducts}
         >
-          {isSorted ? 'Price- High to Low' : 'Price- Low to High'}
+          {isSorted ? 'Price- Low to High' : 'Price- High to Low'}
         </button>
       </div>
 
