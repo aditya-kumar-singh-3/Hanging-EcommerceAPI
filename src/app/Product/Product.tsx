@@ -7,7 +7,8 @@ import Link from 'next/link';
 import { useRouter } from 'next/navigation';
 import { MdStarHalf } from "react-icons/md";
 import { GiShoppingBag } from "react-icons/gi";
-
+import Skeleton from 'react-loading-skeleton'; 
+import 'react-loading-skeleton/dist/skeleton.css';  
 
 interface ProductType {
   id: number;
@@ -24,12 +25,12 @@ interface ProductType {
 export default function ProductListing() {
   const [products, setProducts] = useState<ProductType[]>([]);
   const [originalProducts, setOriginalProducts] = useState<ProductType[]>([]);
-  const [categories, setCategories] = useState<string[]>([]); 
+  const [categories, setCategories] = useState<string[]>([]);
   const [loading, setLoading] = useState<boolean>(true);
-  const [cartItems, setCartItems] = useState<number[]>([]); 
+  const [cartItems, setCartItems] = useState<number[]>([]);
   const [category, setCategory] = useState<string>('');
   const [isSorted, setIsSorted] = useState<boolean>(false);
-  const [page, setPage] = useState<number>(1); 
+  const [page, setPage] = useState<number>(1);
 
   const dispatch = useDispatch();
   const Router = useRouter();
@@ -79,6 +80,7 @@ export default function ProductListing() {
   }, [loading]);
 
   function detail(id: number) {
+    
     Router.push(`/ProductDetail/${id}`);
   }
 
@@ -135,8 +137,16 @@ export default function ProductListing() {
 
   if (loading && products.length === 0) {
     return (
-      <div className="flex justify-center items-center h-screen">
-        <div className="animate-spin rounded-full h-32 w-32 border-t-2 border-b-2 border-gray-900"></div>
+      <div className="container mx-auto px-4 py-8 min-h-screen">
+        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
+          {Array.from({ length: 8 }).map((_, index) => (
+            <div key={index} className="bg-white rounded-lg shadow-2xl p-4">
+              <Skeleton height={200} />
+              <Skeleton height={30} className="my-4" />
+              <Skeleton count={3} />
+            </div>
+          ))}
+        </div>
       </div>
     );
   }
